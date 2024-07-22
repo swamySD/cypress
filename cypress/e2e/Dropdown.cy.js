@@ -19,6 +19,7 @@ describe('Dropdowns',()=>{
         cy.get("#select2-billing_country-container").should('have.text','Italy')
     })
    
+    
     //dropdown with auto suggestions
         it.skip('Auto sugesstions',()=>{
         cy.visit('https://www.wikipedia.org/')

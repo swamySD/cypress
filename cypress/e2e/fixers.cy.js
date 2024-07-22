@@ -6,7 +6,7 @@ describe('MyTestSuite',()=>{
             userData=data
         })
     })
-    it.only('FixturesDemoTest',()=>{
+    it('FixturesDemoTest',()=>{
            cy.visit('https://www.linkedin.com/feed/')
         // cy.get('#username').type(userData.username)
         // cy.get('#password').type(userData.password)
@@ -22,7 +22,7 @@ describe('MyTestSuite',()=>{
         cy.get('#news-module__title > .t-20',{timeout:60000}).should('have.text',"LinkedIn News")
     })
 
-    it('data driven test',()=>{
+    it.only('data driven test',()=>{
         cy.fixture('orange').then((data)=>{
             cy.visit('https://www.linkedin.com/feed')
             data.forEach((userdata)=>{
@@ -33,12 +33,13 @@ describe('MyTestSuite',()=>{
                 if(userdata.username == '9963684670' && userdata.password == "Swamy123"){
                     cy.wait(40000)
                     cy.get('#news-module__title > .t-20',{timeout:60000}).should('have.text',"LinkedIn News")
-                    cy.get('#ember19 > .t-12').click() 
-                    // cy.get('.global-nav__secondary-item--divider > .global-nav__secondary-link').click()
+                    cy.get('#ember18').click() 
+                    cy.get('.global-nav__secondary-item--divider > .global-nav__secondary-link').click()
                 
                 }else{
-                    cy.wait(60000)
+                    cy.wait(6000)
                    cy.get('#error-for-username').should('have.text','Please enter a valid username')
+                   cy.reload()
                 }
             })
         })

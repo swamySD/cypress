@@ -1,29 +1,46 @@
-import Login from "../PageObjects/LoginPage"
-describe('forms',()=>{
+
+import Form from '../PageObjects/LoginPage'
+import { locators } from '../support/Constants';
+
+describe('forms', () => {
+
+    beforeEach(() => {
+        cy.visit(Cypress.env('BASE_URL'));
+    });
+
+    it.only('forms successfull and invalid Cases', () => {
+        
+        cy.fixture('FormsData.json').then((data) => {
+            const form = new Form();
+            const { successCase } = data;
+            form.setUserName(locators.contactForm.userNameInput,successCase.username);
+            form.setEmail(locators.contactForm.emailInput,successCase.email);
+            form.setPhoneNumber(locators.contactForm.phoneNumberInput,successCase.phoneNumber);
+            form.setSubject(locators.contactForm.subjectInput,successCase.subject);
+            form.setMessage(locators.contactForm.messageInput,successCase.message);
+            form.clickSubmit(locators.contactForm.submitButton);
+            form.verifyForm(locators.contactForm.usernameVerification,successCase.username);
+            cy.screenshot('success Data');
+
+            cy.reload();
+
+            const { failureCase } = data;
+            form.setUserName(locators.contactForm.userNameInput,failureCase.username);
+            form.setEmail(locators.contactForm.emailInput,failureCase.email);
+            form.setPhoneNumber(locators.contactForm.phoneNumberInput,failureCase.phoneNumber);
+            form.setSubject(locators.contactForm.subjectInput,failureCase.subject);
+            form.setMessage(locators.contactForm.messageInput,failureCase.message);
+            form.clickSubmit(locators.contactForm.submitButton);
+
+            failureCase.errorMessages.forEach(eachMessage => {
+                form.verifyErrorFileds(locators.contactForm.errorMessages,eachMessage);
+            });
+
+            cy.screenshot('Invalid Data');
+        });
+    });
+
+  
 
 
-    it('forms',()=>{
-        cy.visit('https://automationintesting.online/')
-        const login=new Login()
-        login.setUserName('kumarswamy')
-        login.setEmail('swamy@gmail.com')
-        login.setPhoneNumber('99636846701')
-        login.setSubject('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
-        login.setMessage(' Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')
-        login.clickSubmit()
-        login.verifyLogin('kumarswamy')
-        cy.screenshot('success Data')
-        cy.reload()
-        login.setUserName('kumarswamy')
-        login.setEmail('swamy@gmail.com')
-        login.setPhoneNumber('9888')
-        login.setSubject('frr')
-        login.setMessage('yeerr')
-        login.clickSubmit()
-        login.verifyFileds('Phone must be between 11 and 21 characters.')
-        login.verifyFileds('Subject must be between 5 and 100 characters.')
-        login.verifyFileds('Message must be between 20 and 2000 characters.') 
-        cy.screenshot('Invalid Data')
-    })
-})
-
+});

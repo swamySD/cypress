@@ -1,0 +1,22 @@
+{
+    "successCase": {
+      "username": "kumarswamy",
+      "email": "swamy@gmail.com",
+      "phoneNumber": "99636846701",
+      "subject": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "message": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+      },
+    "failureCase": {
+      "username": "kumarswamy",
+      "email": "swamy@gmail.com",
+      "phoneNumber": "9888",
+      "subject": "frr",
+      "message": "yeerr",
+      "errorMessages": [
+        "Phone must be between 11 and 21 characters.",
+        "Subject must be between 5 and 100 characters.",
+        "Message must be between 20 and 2000 characters."
+      ]
+    }
+  }
+  

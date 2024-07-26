@@ -1,33 +1,33 @@
-class Login{
-    setUserName(username){
-        cy.get('[data-testid="ContactName"]').type(username)
+class Form{
+    setUserName(locator,username){
+        cy.get(locator).type(username)
     }
-    setEmail(email){
-        cy.get('[data-testid="ContactEmail"]').type(email)
+    setEmail(locator,email){
+        cy.get(locator).type(email)
     }
-    setPhoneNumber(phoneNumber){
-        cy.get('[data-testid="ContactPhone"]').type(phoneNumber)
+    setPhoneNumber(locator,phoneNumber){
+        cy.get(locator).type(phoneNumber)
     }
    
-    setSubject(subject){
-        cy.get('[data-testid="ContactSubject"]').type(subject)
+    setSubject(locator,subject){
+        cy.get(locator).type(subject)
     }
-    setMessage(message){
-        cy.get('[data-testid="ContactDescription"]').type(message)
+    setMessage(locator,message){
+        cy.get(locator).type(message)
     }
-    clickSubmit(){
-        cy.get('[class="btn btn-outline-primary float-right"]').click()
+    clickSubmit(locator){
+        cy.get(locator).click()
     }
-    verifyLogin(username){
-        cy.get('div[class="col-sm-5"] div h2').should('have.text',`Thanks for getting in touch ${username}!`)
+    verifyForm(locator,username){
+        cy.get(locator).should('have.text',`Thanks for getting in touch ${username}!`)
     }
 
   
-    verifyFileds(message){
-        cy.get('[class="alert alert-danger"]>p').contains(message)
+    verifyErrorFileds(locator,message){
+        cy.get(locator).contains(message)
     }
 
 
 }
 
-export default Login
+export default Form

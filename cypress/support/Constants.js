@@ -1,5 +1,6 @@
 
-//form urls
+
+
 
 
 
@@ -15,7 +16,7 @@ export const locators = {
       submitButton: '#submitContact',
       errorMessages: '[class="alert alert-danger"]>p',
       usernameVerification: 'div[class="col-sm-5"] div h2',
-    },
+},
     logo: {
       hotelLogo: '[class="hotel-logoUrl"]'
     }

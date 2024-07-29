@@ -72,7 +72,7 @@ describe('forms', () => {
         form.clickSubmit("button[class='btn btn-outline-primary float-right book-room']");
         // form.verifyForm('div[class="col-sm-5"] div h2',successCase.usernameVerification);
         
-        // cy.get('.col-sm-6 > h3').should('have.text',)
+        cy.get('.col-sm-6 > h3').contains('have.text','Booking Successful!')
         })
     })
 

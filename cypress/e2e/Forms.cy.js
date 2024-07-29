@@ -8,8 +8,7 @@ describe('forms', () => {
         cy.visit(Cypress.env('BASE_URL'));
     });
 
-    it.only('forms successfull and invalid Cases', () => {
-        
+    it('form successfull case', () => {
         cy.fixture('FormsData.json').then((data) => {
             const form = new Form();
             const { successCase } = data;
@@ -20,10 +19,12 @@ describe('forms', () => {
             form.setMessage(locators.contactForm.messageInput,successCase.message);
             form.clickSubmit(locators.contactForm.submitButton);
             form.verifyForm(locators.contactForm.usernameVerification,successCase.username);
-            cy.screenshot('success Data');
-
-            cy.reload();
-
+            
+        });
+    });
+    it('form  invalid case', () => {
+        cy.fixture('FormsData.json').then((data) => {
+            const form = new Form();
             const { failureCase } = data;
             form.setUserName(locators.contactForm.userNameInput,failureCase.username);
             form.setEmail(locators.contactForm.emailInput,failureCase.email);
@@ -31,12 +32,9 @@ describe('forms', () => {
             form.setSubject(locators.contactForm.subjectInput,failureCase.subject);
             form.setMessage(locators.contactForm.messageInput,failureCase.message);
             form.clickSubmit(locators.contactForm.submitButton);
-
             failureCase.errorMessages.forEach(eachMessage => {
                 form.verifyErrorFileds(locators.contactForm.errorMessages,eachMessage);
             });
-
-            cy.screenshot('Invalid Data');
         });
     });
 

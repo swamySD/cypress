@@ -7,6 +7,7 @@ describe('forms', () => {
     beforeEach(() => {
         cy.visit(Cypress.env('BASE_URL'));
     });
+    
 
     it('form successfull case', () => {
         cy.fixture('FormsData.json').then((data) => {
